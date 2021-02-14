@@ -7,7 +7,7 @@ public interface Dao<T> {
 
     public T findById(long id);
 
-    public void update(T obj);
+    public void save(T obj);
 
     public void deleteById(long id);
 }

@@ -2,31 +2,31 @@ package ru.dstu.application.dao.entitiesDao;
 
 import org.hibernate.Session;
 import ru.dstu.application.dao.Dao;
-import ru.dstu.application.entities.Student;
+import ru.dstu.application.entities.Credit;
 import ru.dstu.application.utils.HibernateConnector;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class StudentDao implements Dao<Student> {
+public class CreditDao implements Dao<Credit> {
 
     private final HibernateConnector hibernateConnector = new HibernateConnector();
     private final EntityManager entityManager = hibernateConnector.getEntityManagerFactory();
 
     @Override
-    public List<Student> findAll() {
+    public List<Credit> findAll() {
         Session session = entityManager.unwrap(Session.class);
-        return session.createQuery("FROM Student", Student.class).getResultList();
+        return session.createQuery("FROM Credit", Credit.class).getResultList();
     }
 
     @Override
-    public Student findById(long id) {
+    public Credit findById(long id) {
         Session session = entityManager.unwrap(Session.class);
-        return session.get(Student.class, id);
+        return session.get(Credit.class, id);
     }
 
     @Override
-    public void save(Student obj) {
+    public void save(Credit obj) {
         Session session = entityManager.unwrap(Session.class);
         session.saveOrUpdate(obj);
     }
@@ -34,7 +34,7 @@ public class StudentDao implements Dao<Student> {
     @Override
     public void deleteById(long id) {
         Session session = entityManager.unwrap(Session.class);
-        Student obj = findById(id);
+        Credit obj = findById(id);
         session.delete(obj);
     }
 }
