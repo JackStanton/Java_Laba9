@@ -8,7 +8,6 @@ public class AppStarter {
 
     public static void main(String[] args) {
         ExamDao studentDao = new ExamDao();
-        System.out.println(studentDao.findAll());
+        System.out.println(studentDao.findAll().get(0));
     }
-
 }

@@ -20,7 +20,7 @@ public class Exam {
     @Column(name = "mark")
     private String mark;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id", referencedColumnName = "id")
     private Student student;
 
