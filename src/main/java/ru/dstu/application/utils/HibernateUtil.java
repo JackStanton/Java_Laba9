@@ -1,19 +1,66 @@
 package ru.dstu.application.utils;
 
-import org.hibernate.Session;
-import ru.dstu.application.entities.Student;
+import io.github.classgraph.ClassGraph;
+import io.github.classgraph.ClassInfo;
+import io.github.classgraph.ScanResult;
+import ru.dstu.application.dao.Dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
+public class HibernateUtil<T> {
 
-public class HibernateUtil {
+    private Dao<T> dao;
 
-    private Session session;
-
-    public HibernateUtil() {
-        HibernateConnector hibernateConnector = new HibernateConnector();
-//        session = hibernateConnector.getSession();
+    public HibernateUtil(Class<?> clazz) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+        String className = getDaoName(initEntity(clazz));
+        Class<?> daoClass = Class.forName(className);
+        this.dao = (Dao<T>) daoClass.newInstance();
     }
 
+    private String initEntity(Class<?> theClass) throws IllegalAccessException, InstantiationException {
+        return theClass.newInstance().getClass().getName();
+    }
 
+    private String getDaoName(String entityName){
+        String entitiesDaoPackage = "ru.dstu.application.dao.entitiesDao";
+        ArrayList<String> classesArray = new ArrayList<>();
+        try (ScanResult scanResult = new ClassGraph()
+                .whitelistPackages(entitiesDaoPackage)
+                .scan()) {
+            for (ClassInfo classInfo : scanResult.getAllClasses()) {
+                String[] classesTmp = classInfo.getName().split("\\.");
+                int index = classesTmp.length-1;
+                classesArray.add(classesTmp[index]);
+            }
+        }
+        for (String s: classesArray) {
+            String[] tmp = entityName.split("\\.");
+            int index = tmp.length-1;
+            if(s.matches(tmp[index]+".*")){
+                return entitiesDaoPackage+"."+s;
+            }
+        }
+        return null;
+    }
+
+    public void displayList(){
+        List<T> list = dao.findAll();
+        for (T item: list) {
+            System.out.println(item);
+        }
+    }
+
+    public void displayItem(long id){
+        T item = dao.findById(id);
+        System.out.println(item);
+    }
+
+    public T getItem(long id){
+        return dao.findById(id);
+    }
+
+    public void updateOrSaveItem(T obj){
+        dao.save(obj);
+    }
 }

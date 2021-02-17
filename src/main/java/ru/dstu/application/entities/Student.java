@@ -9,7 +9,7 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private double id;
+    private long id;
 
     @Column(name = "studentName")
     private String studentName;
@@ -20,8 +20,8 @@ public class Student {
     @Column(name = "numberOfRecordBook")
     private String numberOfRecordBook;
 
-    public Student(double id, String studentName, String studentSurname, String numberOfRecordBook) {
-        this.id = id;
+    public Student( String studentName, String studentSurname, String numberOfRecordBook) {
+//        this.id = id;
         this.studentName = studentName;
         this.studentSurname = studentSurname;
         this.numberOfRecordBook = numberOfRecordBook;
@@ -34,7 +34,7 @@ public class Student {
         return id;
     }
 
-    public void setId(double id) {
+    public void setId(long id) {
         this.id = id;
     }
 

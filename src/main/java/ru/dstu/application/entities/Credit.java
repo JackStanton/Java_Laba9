@@ -9,7 +9,7 @@ public class Credit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private double id;
+    private long id;
 
     @Column(name = "subjectName")
     private String subjectName;
@@ -24,7 +24,7 @@ public class Credit {
     @JoinColumn(name = "student_id", referencedColumnName = "id")
     private Student student;
 
-    public Credit(double id, String subjectName, int countOfHours, String mark, Student student) {
+    public Credit(long id, String subjectName, int countOfHours, String mark, Student student) {
         this.id = id;
         this.subjectName = subjectName;
         this.countOfHours = countOfHours;
@@ -35,11 +35,11 @@ public class Credit {
     public Credit() {
     }
 
-    public double getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(double id) {
+    public void setId(long id) {
         this.id = id;
     }
 

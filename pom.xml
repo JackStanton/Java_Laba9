@@ -34,6 +34,13 @@
             <version>${hibernate-version}</version>
             <type>pom</type>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.github.classgraph/classgraph -->
+        <dependency>
+            <groupId>io.github.classgraph</groupId>
+            <artifactId>classgraph</artifactId>
+            <version>4.8.102</version>
+        </dependency>
+
     </dependencies>
     <build>
         <resources>
