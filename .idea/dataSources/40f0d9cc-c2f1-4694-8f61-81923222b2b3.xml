@@ -914,97 +914,127 @@ SELECT|sys.sys_config
     <table id="284" parent="2" name="credit"/>
     <table id="285" parent="2" name="exam"/>
     <table id="286" parent="2" name="student"/>
-    <column id="287" parent="284" name="id">
+    <table id="287" parent="2" name="subject"/>
+    <column id="288" parent="284" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="288" parent="284" name="subjectName">
+    <column id="289" parent="284" name="subject_id">
       <Position>2</Position>
-      <DataType>varchar(100)|0s</DataType>
-    </column>
-    <column id="289" parent="284" name="countOfHours">
-      <Position>3</Position>
       <DataType>int|0s</DataType>
     </column>
     <column id="290" parent="284" name="mark">
-      <Position>4</Position>
+      <Position>3</Position>
       <DataType>varchar(10)|0s</DataType>
     </column>
     <column id="291" parent="284" name="student_id">
-      <Position>5</Position>
+      <Position>4</Position>
       <DataType>int|0s</DataType>
     </column>
-    <index id="292" parent="284" name="student_id">
+    <index id="292" parent="284" name="1_idx">
+      <ColNames>subject_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="293" parent="284" name="2">
       <ColNames>student_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="293" parent="284" name="PRIMARY">
+    <key id="294" parent="284" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="294" parent="284" name="credit_ibfk_1">
+    <foreign-key id="295" parent="284" name="1">
+      <ColNames>subject_id</ColNames>
+      <RefTableName>subject</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="296" parent="284" name="2">
       <ColNames>student_id</ColNames>
       <RefTableName>student</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="295" parent="285" name="id">
+    <column id="297" parent="285" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="296" parent="285" name="subjectName">
+    <column id="298" parent="285" name="subject_id">
       <Position>2</Position>
-      <DataType>varchar(100)|0s</DataType>
-    </column>
-    <column id="297" parent="285" name="countOfHours">
-      <Position>3</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="298" parent="285" name="mark">
-      <Position>4</Position>
+    <column id="299" parent="285" name="mark">
+      <Position>3</Position>
       <DataType>varchar(10)|0s</DataType>
     </column>
-    <column id="299" parent="285" name="student_id">
-      <Position>5</Position>
+    <column id="300" parent="285" name="student_id">
+      <Position>4</Position>
       <DataType>int|0s</DataType>
     </column>
-    <index id="300" parent="285" name="student_id">
+    <index id="301" parent="285" name="123_idx">
+      <ColNames>subject_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="302" parent="285" name="student_id">
       <ColNames>student_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="301" parent="285" name="PRIMARY">
+    <key id="303" parent="285" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="302" parent="285" name="exam_ibfk_1">
+    <foreign-key id="304" parent="285" name="123">
+      <ColNames>subject_id</ColNames>
+      <RefTableName>subject</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="305" parent="285" name="exam_ibfk_1">
       <ColNames>student_id</ColNames>
       <RefTableName>student</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="303" parent="286" name="id">
+    <column id="306" parent="286" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="304" parent="286" name="studentName">
+    <column id="307" parent="286" name="studentName">
       <Position>2</Position>
       <DataType>varchar(100)|0s</DataType>
     </column>
-    <column id="305" parent="286" name="studentSurname">
+    <column id="308" parent="286" name="studentSurname">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
     </column>
-    <column id="306" parent="286" name="numberOfRecordBook">
+    <column id="309" parent="286" name="numberOfRecordBook">
       <Position>4</Position>
       <DataType>varchar(10)|0s</DataType>
     </column>
-    <key id="307" parent="286" name="PRIMARY">
+    <key id="310" parent="286" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="311" parent="287" name="id">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="312" parent="287" name="subjectName">
+      <Position>2</Position>
+      <DataType>varchar(45)|0s</DataType>
+    </column>
+    <column id="313" parent="287" name="countOfHours">
+      <Position>3</Position>
+      <DataType>varchar(45)|0s</DataType>
+    </column>
+    <key id="314" parent="287" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

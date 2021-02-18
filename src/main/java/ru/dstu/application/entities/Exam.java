@@ -2,7 +2,7 @@ package ru.dstu.application.entities;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "Exam")
 @Table(name = "exam")
 public class Exam {
 
@@ -11,23 +11,19 @@ public class Exam {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "subjectName")
-    private String subjectName;
-
-    @Column(name = "countOfHours")
-    private int countOfHours;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "subject_id")
+    private Subject subject_id;
 
     @Column(name = "mark")
     private String mark;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "student_id", referencedColumnName = "id")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "student_id")
     private Student student;
 
-    public Exam(long id, String subjectName, int countOfHours, String mark, Student student) {
-        this.id = id;
-        this.subjectName = subjectName;
-        this.countOfHours = countOfHours;
+    public Exam(Subject subject_id, String mark, Student student) {
+        this.subject_id = subject_id;
         this.mark = mark;
         this.student = student;
     }
@@ -43,20 +39,12 @@ public class Exam {
         this.id = id;
     }
 
-    public String getSubjectName() {
-        return subjectName;
+    public Subject getSubject_id() {
+        return subject_id;
     }
 
-    public void setSubjectName(String subjectName) {
-        this.subjectName = subjectName;
-    }
-
-    public int getCountOfHours() {
-        return countOfHours;
-    }
-
-    public void setCountOfHours(int countOfHours) {
-        this.countOfHours = countOfHours;
+    public void setSubject_id(Subject subject_id) {
+        this.subject_id = subject_id;
     }
 
     public String getMark() {
@@ -79,8 +67,7 @@ public class Exam {
     public String toString() {
         return "Exam{" +
                 "id=" + id +
-                ", subjectName='" + subjectName + '\'' +
-                ", countOfHours=" + countOfHours +
+                ", subject_id=" + subject_id +
                 ", mark='" + mark + '\'' +
                 ", student=" + student +
                 '}';

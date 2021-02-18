@@ -1,6 +1,7 @@
 package ru.dstu.application.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "student")
@@ -19,6 +20,12 @@ public class Student {
 
     @Column(name = "numberOfRecordBook")
     private String numberOfRecordBook;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Credit> credit;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Exam> exam;
 
     public Student( String studentName, String studentSurname, String numberOfRecordBook) {
 //        this.id = id;
