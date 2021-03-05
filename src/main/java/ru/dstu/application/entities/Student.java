@@ -21,10 +21,10 @@ public class Student {
     @Column(name = "numberOfRecordBook")
     private String numberOfRecordBook;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "student",cascade = CascadeType.ALL)
     private List<Credit> credit;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "student",cascade = CascadeType.ALL)
     private List<Exam> exam;
 
     public Student( String studentName, String studentSurname, String numberOfRecordBook) {

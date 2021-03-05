@@ -1,6 +1,7 @@
 package ru.dstu.application.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "Subject")
@@ -18,11 +19,11 @@ public class Subject {
     @Column(name = "countOfHours")
     private long countOfHours;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Exam> exam;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject", cascade = CascadeType.ALL)
+    private List<Exam> exam = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Credit> credit;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject",cascade = CascadeType.ALL)
+    private List<Credit> credit = new ArrayList<>();
 
     public Subject() {
     }
@@ -62,6 +63,7 @@ public class Subject {
                 "id=" + id +
                 ", subjectName='" + subjectName + '\'' +
                 ", countOfHours=" + countOfHours +
+                ", passedTimes=" + exam.size() +
                 '}';
     }
 }

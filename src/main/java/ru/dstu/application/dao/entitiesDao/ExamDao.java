@@ -1,6 +1,7 @@
 package ru.dstu.application.dao.entitiesDao;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import ru.dstu.application.dao.Dao;
 import ru.dstu.application.entities.Exam;
 import ru.dstu.application.utils.HibernateConnector;
@@ -10,8 +11,7 @@ import java.util.List;
 
 public class ExamDao implements Dao<Exam> {
 
-    private final HibernateConnector hibernateConnector = new HibernateConnector();
-    private final EntityManager entityManager = hibernateConnector.getEntityManagerFactory();
+    private final EntityManager entityManager = HibernateConnector.entityManager;
 
     @Override
     public List<Exam> findAll() {
@@ -28,7 +28,10 @@ public class ExamDao implements Dao<Exam> {
     @Override
     public void save(Exam obj) {
         Session session = entityManager.unwrap(Session.class);
+        session.beginTransaction();
+        Transaction transaction = session.getTransaction();
         session.saveOrUpdate(obj);
+        transaction.commit();
     }
 
     @Override

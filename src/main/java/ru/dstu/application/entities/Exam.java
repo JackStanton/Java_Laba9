@@ -13,7 +13,7 @@ public class Exam {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "subject_id")
-    private Subject subject_id;
+    private Subject subject;
 
     @Column(name = "mark")
     private String mark;
@@ -22,8 +22,8 @@ public class Exam {
     @JoinColumn(name = "student_id")
     private Student student;
 
-    public Exam(Subject subject_id, String mark, Student student) {
-        this.subject_id = subject_id;
+    public Exam(Subject subject, String mark, Student student) {
+        this.subject = subject;
         this.mark = mark;
         this.student = student;
     }
@@ -39,12 +39,12 @@ public class Exam {
         this.id = id;
     }
 
-    public Subject getSubject_id() {
-        return subject_id;
+    public Subject getSubject() {
+        return subject;
     }
 
-    public void setSubject_id(Subject subject_id) {
-        this.subject_id = subject_id;
+    public void setSubject(Subject subject_id) {
+        this.subject = subject_id;
     }
 
     public String getMark() {
@@ -67,7 +67,7 @@ public class Exam {
     public String toString() {
         return "Exam{" +
                 "id=" + id +
-                ", subject_id=" + subject_id +
+                ", subject_id=" + subject +
                 ", mark='" + mark + '\'' +
                 ", student=" + student +
                 '}';

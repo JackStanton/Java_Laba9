@@ -10,7 +10,7 @@ import java.util.List;
 
 public class HibernateUtil<T> {
 
-    private Dao<T> dao;
+    private final Dao<T> dao;
 
     public HibernateUtil(Class<?> clazz) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
         String className = getDaoName(initEntity(clazz));
